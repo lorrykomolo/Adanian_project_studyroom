@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from email.charset import BASE64
 from pathlib import Path
 import os
-import django_heroku
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-$2&t39(rxc)+yib_!vf8=kh)ojz9uj2wuq!8c=n7pty#ag3in6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['letslearn-together.herokuapp.com']
+ALLOWED_HOSTS = ['letslearn-together.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -45,12 +45,14 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+    'whitenoise.runserver_nostatic',
 ]
 
 AUTH_USER_MODEL = 'base.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -99,6 +101,10 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -136,18 +142,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-# MEDIA_URL = '/images/'
-
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static'
-# ]
-
-# MEDIA_ROOT =BASE_DIR / 'static/images'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
-django_heroku.settings(locals())
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+MEDIA_ROOT = BASE_DIR / 'static/images'
+
 
 
 # Default primary key field type
@@ -155,4 +158,8 @@ django_heroku.settings(locals())
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ALL_sORIGINS = True
+CORS_ALLOWED_ALL_ORIGINS = True
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
