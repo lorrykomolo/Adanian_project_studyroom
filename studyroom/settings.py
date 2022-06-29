@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from email.charset import BASE64
 from pathlib import Path
+import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$2&t39(rxc)+yib_!vf8=kh)ojz9uj2wuq!8c=n7pty#ag3in6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['letslearn-together.herokuapp.com']
 
 
 # Application definition
@@ -87,8 +89,13 @@ WSGI_APPLICATION = 'studyroom.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd2adukha4iiqvh',
+        'USER': 'nryiverpwslvyd',
+        'PASSWORD': 'aceaa1788d587c3c1af50f297aa149a709e757774384efa446137f0d5447b387',
+        'HOST': 'ec2-44-198-82-71.compute-1.amazonaws.com',
+        'PORT': '5432',
+
     }
 }
 
@@ -129,14 +136,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/images/'
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+# ]
+
+# MEDIA_ROOT =BASE_DIR / 'static/images'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
-
-MEDIA_ROOT =BASE_DIR / 'static/images'
+django_heroku.settings(locals())
 
 
 # Default primary key field type
