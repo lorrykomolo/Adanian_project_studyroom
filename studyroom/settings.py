@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-$2&t39(rxc)+yib_!vf8=kh)ojz9uj2wuq!8c=n7pty#ag3in6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['letslearn-together.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['we-learn-together.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -92,10 +92,10 @@ WSGI_APPLICATION = 'studyroom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd2adukha4iiqvh',
-        'USER': 'nryiverpwslvyd',
-        'PASSWORD': 'aceaa1788d587c3c1af50f297aa149a709e757774384efa446137f0d5447b387',
-        'HOST': 'ec2-44-198-82-71.compute-1.amazonaws.com',
+        'NAME': 'danu6pg4flsksb',
+        'USER': 'rvvjjvacnolbxo',
+        'PASSWORD': '0de00f81a60b8db416f919ee5cac02ed204034001ab785565347c80da81ae508',
+        'HOST': 'ec2-3-222-74-92.compute-1.amazonaws.com',
         'PORT': '5432',
 
     }
@@ -130,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'GMT+3'
 
 USE_I18N = True
 
@@ -141,6 +141,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'

@@ -1,1 +1,1 @@
-web: gunicorn studyroom.wsgi
+web: gunicorn studyroom.wsgi --log-file -
