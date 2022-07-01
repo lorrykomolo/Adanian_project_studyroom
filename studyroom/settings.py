@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from email.charset import BASE64
 from pathlib import Path
 import os
-import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,33 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #'base.apps.BaseConfig',
-    'custom_user',
+    'base.apps.BaseConfig',
 
     'rest_framework',
     'corsheaders',
     'whitenoise.runserver_nostatic',
 ]
 
-#AUTH_USER_MODEL = 'base.User'
-AUTH_USER_MODEL = 'custom_user.CustomUser'
-
-AUTHENTICATION_BACKENDS = (
-    'custom_user.backends.CustomUserAuth',
-    'django.contrib.auth.backends.ModelBackend',
-    # 'django.contrib.auth.backends.RemoteUserBackend',
-)
-
-
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = '35253828@Eo' #my gmail password
-EMAIL_HOST_USER = 'omoloelvis533@gmail.com' #my gmail username
-DEFAULT_FROM_EMAIL = 'omoloelvis533@gmail.com'
-SERVER_EMAIL = 'omoloelvis533@gmail.com'
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+AUTH_USER_MODEL = 'base.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
