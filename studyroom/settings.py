@@ -48,7 +48,25 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
 ]
 
-AUTH_USER_MODEL = 'base.User'
+#AUTH_USER_MODEL = 'base.User'
+AUTH_USER_MODEL = 'custom_user.CustomUser'
+
+AUTHENTICATION_BACKENDS = (
+    'custom_user.backends.CustomUserAuth',
+    'django.contrib.auth.backends.ModelBackend',
+    # 'django.contrib.auth.backends.RemoteUserBackend',
+)
+
+
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = '35253828@Eo' #my gmail password
+EMAIL_HOST_USER = 'omoloelvis533@gmail.com' #my gmail username
+DEFAULT_FROM_EMAIL = 'omoloelvis533@gmail.com'
+SERVER_EMAIL = 'omoloelvis533@gmail.com'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -130,7 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'GMT+3'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
